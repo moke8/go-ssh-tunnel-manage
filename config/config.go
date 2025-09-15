@@ -24,7 +24,7 @@ func Load() *Config {
 	
 	return &Config{
 		SSHPort: "53322",                              // 默认SSH端口
-		WebPort: "8080",                               // 默认Web端口
+		WebPort: "53380",                               // 默认Web端口
 		DBPath:  filepath.Join(wd, "data", "ssh_manage.db"), // 数据库路径
 		LogPath: filepath.Join(wd, "logs", "ssh_manage.log"), // 日志路径
 	}
