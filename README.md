@@ -83,6 +83,24 @@ ssh -p 53322 username@server_ip
 ssh -p 53322 -L local_port:target_host:target_port username@server_ip
 ```
 
+### SOCKS5代理使用
+
+SSH隧道可以作为SOCKS5代理使用，命令如下：
+```bash
+ssh -D 1080 -p 53322 -C -N username@server_ip
+```
+
+参数说明：
+- `-D 1080`：在本地1080端口创建SOCKS5代理
+- `-p 53322`：连接SSH服务器的53322端口
+- `-C`：启用数据压缩
+- `-N`：不执行远程命令，仅转发端口
+
+配置浏览器或其他应用程序使用SOCKS5代理：
+- 代理类型：SOCKS5
+- 代理地址：127.0.0.1
+- 代理端口：1080
+
 ## 功能模块说明
 
 ### 用户管理
