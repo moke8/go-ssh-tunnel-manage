@@ -10,6 +10,7 @@
 - 流量统计：实时统计上行和下行流量
 - 防火墙规则：支持目标地址白名单和黑名单
 - Web管理界面：友好的Web界面进行管理操作
+- Web管理界面密码保护：为Web管理界面添加基础认证保护
 
 ## 目录结构
 
@@ -68,7 +69,7 @@ go build -o ssh-manage .
 ### 启动后操作
 
 1. 访问Web管理界面：http://localhost:53380
-2. 使用默认管理员账号登录
+2. 使用默认管理员账号登录 (用户名: admin, 密码: admin123)
 3. 可以添加新用户、查看连接记录、设置防火墙规则等
 
 ### SSH客户端连接
@@ -100,6 +101,31 @@ ssh -D 1080 -p 53322 -C -N username@server_ip
 - 代理类型：SOCKS5
 - 代理地址：127.0.0.1
 - 代理端口：1080
+
+## Web管理界面密码保护
+
+为了提高安全性，Web管理界面现在支持基础认证保护。默认情况下，使用以下凭据登录：
+
+- 用户名：admin
+- 密码：admin123
+
+### 自定义认证凭据
+
+可以通过以下方式自定义认证凭据：
+
+1. 通过环境变量设置：
+   ```bash
+   export WEB_USERNAME=myuser
+   export WEB_PASSWORD=mypassword
+   ./ssh-manage
+   ```
+
+2. 或者在启动时临时设置：
+   ```bash
+   WEB_USERNAME=myuser WEB_PASSWORD=mypassword ./ssh-manage
+   ```
+
+注意：如果将用户名或密码设置为空字符串，则会禁用认证功能。
 
 ## 功能模块说明
 
@@ -165,6 +191,7 @@ ssh -D 1080 -p 53322 -C -N username@server_ip
 - 所有SSH连接都经过用户认证
 - 支持通过防火墙规则限制目标地址访问
 - 用户密码以明文形式存储
+- Web管理界面支持基础认证保护
 
 ## 许可证
 

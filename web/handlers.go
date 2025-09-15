@@ -9,12 +9,22 @@ import (
 	"sort"
 	"strconv"
 	"time"
+	"ssh-manage/config"
 	"ssh-manage/models"
 	"ssh-manage/services"
 	"ssh-manage/utils"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
+	// 添加基础认证
+	cfg := config.Load()
+	if !checkAuth(r, cfg.WebUsername, cfg.WebPassword) {
+		w.Header().Set("WWW-Authenticate", `Basic realm="SSH Manage"`)
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Unauthorized\n"))
+		return
+	}
+	
 	switch r.URL.Path {
 	case "/":
 		if r.Method == "POST" {
@@ -35,6 +45,21 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.NotFound(w, r)
 	}
+}
+
+// checkAuth 检查基础认证
+func checkAuth(r *http.Request, username, password string) bool {
+	// 如果用户名或密码为空，则不启用认证
+	if username == "" || password == "" {
+		return true
+	}
+	
+	user, pass, ok := r.BasicAuth()
+	if !ok {
+		return false
+	}
+	
+	return user == username && pass == password
 }
 
 func serveUsersPage(w http.ResponseWriter, r *http.Request) {
