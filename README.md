@@ -193,6 +193,15 @@ ssh -D 1080 -p 53322 -C -N username@server_ip
 - 用户密码以明文形式存储
 - Web管理界面支持基础认证保护
 
+## 图片预览
+
+<img width="1700" height="762" alt="PixPin_2025-09-15_16-05-31" src="https://github.com/user-attachments/assets/3bef0ce2-f4a6-471e-bdee-61fd40135ecb" />
+<img width="1718" height="795" alt="PixPin_2025-09-15_16-05-18" src="https://github.com/user-attachments/assets/5f31004b-de28-4d51-a0bc-6e43230d0836" />
+<img width="1669" height="1182" alt="PixPin_2025-09-15_16-03-55" src="https://github.com/user-attachments/assets/58d8b347-cf86-4a0f-8798-040d44f5e86e" />
+<img width="1727" height="936" alt="PixPin_2025-09-15_16-03-36" src="https://github.com/user-attachments/assets/3cab5b35-d633-4b65-bc23-3b3d8b097d34" />
+
+
+
 ## 许可证
 
 MIT License
